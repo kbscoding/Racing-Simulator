@@ -8,10 +8,10 @@ class Car:
 
         self.x = 0.0
         self.y = 0.0
-        self.angle = 0.0          # degrees (0 = right, 90 = down, -90 = up)
-        self.velocity = 0.0       # pixels per frame, positive = forward
+        self.angle = 0.0          
+        self.velocity = 0.0       
 
-        # Tuning
+
         self.max_speed = 10
         self.accel = 0.40
         self.brake = 0.70
@@ -20,7 +20,7 @@ class Car:
         self.steer_rate_slow = 3.2
 
     def update(self, keys):
-        # Steering
+
         steer = 0
         if keys[pygame.K_LEFT]  or keys[pygame.K_a]: steer -= 1
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]: steer += 1
@@ -30,7 +30,7 @@ class Car:
             self.angle += steer * steer_amount * (abs(self.velocity) / self.max_speed + 0.15)
             self.angle %= 360
 
-        # Acceleration / braking
+
         accel_input = 0
         if keys[pygame.K_UP]   or keys[pygame.K_w]: accel_input += 1
         if keys[pygame.K_DOWN] or keys[pygame.K_s]: accel_input -= 1
@@ -41,7 +41,7 @@ class Car:
             if self.velocity > 0:
                 self.velocity -= self.brake
             else:
-                self.velocity -= self.accel * 0.6  # slower reverse
+                self.velocity -= self.accel * 0.6 
         else:
             # Coast / natural decel
             if abs(self.velocity) > self.decel:
@@ -57,7 +57,7 @@ class Car:
         self.y += self.velocity * math.sin(rad)
 
     def draw(self, surface: pygame.Surface):
-        # Rotate only when needed
+
         self._surf = pygame.transform.rotozoom(self._orig, -self.angle, 1.0)
         rect = self._surf.get_rect(center=(round(self.x), round(self.y)))
         surface.blit(self._surf, rect.topleft)
