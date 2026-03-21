@@ -43,7 +43,7 @@ class Car:
             else:
                 self.velocity -= self.accel * 0.6 
         else:
-            # Coast / natural decel
+
             if abs(self.velocity) > self.decel:
                 self.velocity -= math.copysign(self.decel, self.velocity)
             else:
@@ -51,7 +51,6 @@ class Car:
 
         self.velocity = max(-self.max_speed * 0.45, min(self.max_speed, self.velocity))
 
-        # Apply movement
         rad = math.radians(self.angle)
         self.x += self.velocity * math.cos(rad)
         self.y += self.velocity * math.sin(rad)
