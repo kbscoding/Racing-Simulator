@@ -32,7 +32,7 @@ class PlayScreen(BaseScreen):
         self.selected_vehicle = None
         self.car = None
 
-        # Race state
+
         self.ready_prompt = False
         self.countdown_active = False
         self.countdown_start_ms = 0
@@ -44,10 +44,10 @@ class PlayScreen(BaseScreen):
         self.lap_started = False
         self.game_over = False
 
-        # Confirm back overlay
+
         self.confirm_back = False
 
-        # Initialize track and collision system
+
         self.prepare_track()
 
     def prepare_track(self):
