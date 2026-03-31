@@ -4,9 +4,6 @@ from cars import Car
 from systems.collision_system import CollisionSystem
 from utils.helpers import scaled, blur_surface, pct_to_rect
 
-# -----------------------------
-# Constants
-# -----------------------------
 CRASH_THRESHOLD = 50
 MASK_SCALE = 0.85
 MAINTRACK_IMG = "Images/maintrack2.png"
@@ -18,9 +15,6 @@ CAR_IMAGES = [
 ]
 START_Y_RATIO = 0.8  # spawn at 80% down the screen
 
-# -----------------------------
-# PlayScreen Class
-# -----------------------------
 class PlayScreen(BaseScreen):
     def __init__(self, game):
         super().__init__(game)
@@ -56,9 +50,6 @@ class PlayScreen(BaseScreen):
         # Initialize track and collision system
         self.prepare_track()
 
-    # -----------------------------
-    # Track Preparation
-    # -----------------------------
     def prepare_track(self):
         size = self.game.current_size
         scale = size[1] / self.track.get_height()
@@ -76,9 +67,7 @@ class PlayScreen(BaseScreen):
         if self.selected_vehicle:
             self.spawn_vehicle(self.selected_vehicle)
 
-    # -----------------------------
-    # Event Handling
-    # -----------------------------
+
     def handle_event(self, event):
         # ESC key for back to main menu
         if event.type == pygame.KEYDOWN:
@@ -124,9 +113,7 @@ class PlayScreen(BaseScreen):
             if self.confirm_back:
                 self.confirm_back = False
 
-    # -----------------------------
-    # Spawn Vehicle
-    # -----------------------------
+
     def spawn_vehicle(self, num):
         surf = pygame.image.load(CAR_IMAGES[num-1])
         h = max(24, int(self.game.current_size[1] * 0.05))
@@ -138,9 +125,7 @@ class PlayScreen(BaseScreen):
         self.selected_vehicle = num
         self.ready_prompt = True
 
-    # -----------------------------
-    # Reset Play State
-    # -----------------------------
+
     def reset_play_state(self):
         self.vehicle_choice = ""
         self.selected_vehicle = None
@@ -157,9 +142,7 @@ class PlayScreen(BaseScreen):
         self.game_over = False
         self.confirm_back = False
 
-    # -----------------------------
-    # Update Game Logic
-    # -----------------------------
+
     def update(self):
         if not self.car:
             return
@@ -198,9 +181,6 @@ class PlayScreen(BaseScreen):
                 self.show_final_time = True
                 self.lap_started = False
 
-    # -----------------------------
-    # Draw Everything
-    # -----------------------------
     def draw(self, surface):
         surface.fill((0, 0, 0))
         size = self.game.current_size
